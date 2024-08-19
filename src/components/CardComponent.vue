@@ -9,24 +9,24 @@
             </div>
         </div>
 
-        <div class="profile-card">
+        <div class="profile-card" v-if="login">
             <img class="profile-img" :src="avatar_url" alt="Lucas Bello" />
-            <h1 class="name title">{{ this.name }}</h1>
-            <h4 class="bio">{{ this.bio }}</h4>
-            <h4 class="username">{{ this.login }}</h4>
-            <h4 class="location">{{ this.location }}</h4>
+            <h1 class="name title">{{ name }}</h1>
+            <h4 class="bio">{{ bio }}</h4>
+            <h4 class="username">@{{ login }}</h4>
+            <h4 class="location">{{ location }}</h4>
             <div class="followers">
-                <h5 class="followers"> {{ this.followers }} <span>seguidores</span></h5>
-                <h5 class="following">{{ this.following }} <span>seguindo</span></h5>
+                <h5 class="followers"> {{ followers }} <span>seguidores</span></h5>
+                <h5 class="following">{{ following }} <span>seguindo</span></h5>
             </div>
 
             <div class="repos">
-                <h5 class="repo">Repositórios Públicos: {{ this.public_repos }}</h5>
+                <h5 class="repo">Repositórios Públicos: {{ public_repos }}</h5>
             </div>
 
             <div class="socials">
-                <h5 class="social">Twitter: {{ this.twitter_username }}</h5>
-                <h5 class="social">Blog: {{ this.blog }}</h5>
+                <h5 class="social">Twitter: {{ twitter_username }}</h5>
+                <h5 class="social">Blog: {{ blog }}</h5>
             </div>
         </div>
     </div>
@@ -59,7 +59,7 @@ export default {
 
                 const response = await fetch(`https://api.github.com/users/${this.username}`);
                 const data = await response.json();
-                
+
                 data.bio ? this.bio = data.bio : this.bio = 'Sem bio';
                 data.location ? this.location = data.location : this.location = 'Sem localização';
                 data.followers ? this.followers = data.followers : this.followers = 'Sem seguidores';
@@ -185,6 +185,12 @@ export default {
                         color: #999;
                     }
                 }
+            }
+
+            .socials {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
             }
         }
     }
