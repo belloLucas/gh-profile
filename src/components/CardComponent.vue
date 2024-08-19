@@ -5,29 +5,31 @@
             <div class="inputs">
                 <input type="text" placeholder="Digite o nome de usuário" v-model="username"/>
                 <button type="submit" @click="fetchData(username)" >Pesquisar</button>
-
             </div>
         </div>
 
         <div class="profile-card" v-if="login">
             <img class="profile-img" :src="avatar_url" alt="Lucas Bello" />
             <h1 class="name title">{{ name }}</h1>
-            <h4 class="bio">{{ bio }}</h4>
             <h4 class="username">@{{ login }}</h4>
-            <h4 class="location">{{ location }}</h4>
+            <h4 class="bio">{{ bio }}</h4>
+            
+
             <div class="followers">
                 <h5 class="followers"> {{ followers }} <span>seguidores</span></h5>
                 <h5 class="following">{{ following }} <span>seguindo</span></h5>
+            </div>
+
+            <div class="socials">
+                <h5 class="social">Twitter: @{{ twitter_username }}</h5>
+                <h5 class="social">Site: {{ blog }}</h5>
             </div>
 
             <div class="repos">
                 <h5 class="repo">Repositórios Públicos: {{ public_repos }}</h5>
             </div>
 
-            <div class="socials">
-                <h5 class="social">Twitter: {{ twitter_username }}</h5>
-                <h5 class="social">Blog: {{ blog }}</h5>
-            </div>
+            <h4 class="location">📍 {{ location }}</h4>
         </div>
     </div>
 </template>
@@ -158,11 +160,14 @@ export default {
             }
 
             .location {
-                font-size: 14px;
+                font-size: 16px;
                 color: #666;
             }
 
             .bio {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 5px;
                 font-size: 16px;
                 color: #666;
             }
@@ -170,7 +175,6 @@ export default {
             .followers {
                 display: flex;
                 justify-content: space-around;
-                margin-top: 10px;
 
                 h5 {
                     display: flex;
@@ -187,10 +191,23 @@ export default {
                 }
             }
 
+            .repos {
+                margin: 10px 0;
+                font-size: 18px;
+                color: #666;
+            }
+
             .socials {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
+
+                h5 {
+                    gap: 5px;
+                    margin: 0;
+                    font-size: 16px;
+                    color: #666;
+                }
             }
         }
     }
