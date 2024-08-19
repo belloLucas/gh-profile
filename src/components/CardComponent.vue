@@ -55,24 +55,32 @@ export default {
     methods: {
         async fetchData(username) {
             try{
-                if(!username) {
-                    throw new Error('Usuário não encontrado');
+                if (!username) {
+                    throw new Error('Nome de usuário precisa ser preenchido');
                 }
 
                 const response = await fetch(`https://api.github.com/users/${this.username}`);
                 const data = await response.json();
 
-                data.bio ? this.bio = data.bio : this.bio = 'Sem bio';
-                data.location ? this.location = data.location : this.location = 'Sem localização';
-                data.followers ? this.followers = data.followers : this.followers = 'Sem seguidores';
-                data.following ? this.following = data.following : this.following = 'Sem seguindo';
-                data.public_repos ? this.public_repos = data.public_repos : this.public_repos = 'Sem repositórios públicos';
-                data.twitter_username ? this.twitter_username = data.twitter_username : this.twitter_username = 'Sem twitter';
-                data.blog ? this.blog = data.blog : this.blog = 'Sem blog';
-                data.avatar_url ? this.avatar_url = data.avatar_url : this.avatar_url = 'Sem imagem';
-                data.email ? this.email = data.email : this.email = 'Sem email';
-                data.name ? this.name = data.name : this.name = 'Sem nome';
-                data.login ? this.login = data.login : this.login = 'Sem login';
+                if (!data) {
+                    throw new Error('Ocorreu um erro. Tente novamente.');
+                }
+                
+                if (data.message === 'Not Found') {
+                    throw new Error('Usuário não encontrado');
+                } else {
+                    this.bio = data.bio;
+                    this.location = data.location;
+                    this.followers = data.followers;
+                    this.following = data.following;
+                    this.public_repos = data.public_repos;
+                    this.twitter_username = data.twitter_username;
+                    this.blog = data.blog;
+                    this.avatar_url = data.avatar_url;
+                    this.email = data.email;
+                    this.name = data.name;
+                    this.login = data.login;
+                }
             } catch (error) {
                 throw new Error(error)
             }
