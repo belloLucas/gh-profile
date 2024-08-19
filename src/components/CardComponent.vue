@@ -74,7 +74,6 @@ export default {
                 data.name ? this.name = data.name : this.name = 'Sem nome';
                 data.login ? this.login = data.login : this.login = 'Sem login';
             } catch (error) {
-                console.error(error);
                 throw new Error(error)
             }
 
